@@ -16,7 +16,6 @@ Para que eu possa gerenciar o catálogo de forma rápida e eficiente
       | Livro de teste 6 | Autor teste 6 | Romance   |        300 |
     Então deve aparecer uma mensagem: "Livro adicionado com sucesso!"
 
-  @only
   Esquema do Cenário: Adicionar livros usando esquema do cenário
     Dado que eu estou na página de administrador de livros
     Quando eu adiciono um livro com "<titulo>", "<autor>", "<categoria>" e "<exemplares>"
@@ -30,3 +29,9 @@ Para que eu possa gerenciar o catálogo de forma rápida e eficiente
       | Livro de teste 4                 | Autor teste 8  | Biografia  |        541 |
       | Livro de teste 5                 | Autor teste 9  | Tecnologia |         27 |
       | Livro de teste 6                 | Autor teste 10 | Terror     |       3000 |
+
+  @only
+  Cenário: Não permitir cadastro de livro sem título
+  Dado que eu estou na página de administrador de livros
+  Quando eu tento adicionar um livro sem título
+  Então o livro não deve ser cadastrado

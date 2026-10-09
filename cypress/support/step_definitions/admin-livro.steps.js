@@ -60,6 +60,23 @@ When("eu adiciono novos livros com os seguintes dados:", (dataTable) => {
     })
 });
 
-when('eu adiciono um livro com {string}, {string}, {string} e {string}',(titulo, autor, categoria, exemplares) =>{
+When('eu adiciono um livro com {string}, {string}, {string} e {string}',(titulo, autor, categoria, exemplares) =>{
     cy.adicionarLivro(titulo, autor, categoria, exemplares)
 }); 
+
+When('eu tento adicionar um livro sem título', () => {
+    cy.get('.btn-success').click();
+  
+    cy.get('#book-title').should('be.visible').clear();
+
+    cy.get('#book-author').type('Autor teste');
+    cy.get('#book-category').select('Aventura');
+    cy.get('#book-copies').clear().type('2');
+
+    cy.get('#save-book-btn').click();
+});
+
+Then('o livro não deve ser cadastrado', () => {
+    cy.get('#book-title').should('have.value', '');
+    cy.get('#book-title').should('have.attr', 'required');
+});
